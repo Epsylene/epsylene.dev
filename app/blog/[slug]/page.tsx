@@ -15,6 +15,7 @@ import rehypeLinkifyBibliography from '@/lib/rehype-linkify-bibliography'
 import rehypeMoveBibliography from '@/lib/rehype-move-bibliography'
 import rehypeToc, { TocItem } from '@/lib/rehype-toc'
 import rehypeFootnoteHeading from '@/lib/rehype-footnote-heading'
+import rehypeFootnoteBacklinks from '@/lib/rehype-footnote-backlinks'
 
 export function generateStaticParams() {
   const slugs = getPostSlugs()
@@ -49,6 +50,7 @@ export default async function BlogPost({ params }) {
         rehypePlugins: [
           [ rehypeCitation, rehypeCitationProps ],
           rehypeFootnoteHeading,
+          rehypeFootnoteBacklinks,
           rehypeLinkifyBibliography,
           rehypeMoveBibliography,
           [ rehypeToc, headings ]

@@ -153,6 +153,15 @@ table {
   /* @apply hidden; */
 }
 
+.footnotes li {
+  margin-bottom: 0.5em;
+}
+
+.footnote-number {
+  @apply text-lg font-semibold;
+  letter-spacing: 0.08em;
+}
+
 .margin-note {
   @apply block text-sm leading-[1.15];
   float: right;
