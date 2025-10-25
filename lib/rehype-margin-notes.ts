@@ -75,7 +75,9 @@ export default function rehypeMarginNotes() {
                 {
                   type: 'element',
                   tagName: 'span',
-                  properties: {},
+                  properties: {
+                    className: 'margin-note-content'
+                  },
                   children: content
                 }
               ]
