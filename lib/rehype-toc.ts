@@ -17,6 +17,7 @@ function extractText(node): string {
 }
 
 export default function rehypeToc(toc: TocItem[]) {
+  toc.push({ depth: 2, text: 'haut de page', id: '' })
   return (tree: Root) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'h2' || node.tagName === 'h3') {
