@@ -22,7 +22,7 @@ export function MarginNoteHandler() {
     // Hover a footnote reference -> expand corresponding
     // margin note
     notes.forEach(note => {
-      const id = note.id.replace('margin-note-', 'user-content-fnref-')
+      const id = note.id.replace('margin-note-', 'fnref')
       const ref = document.getElementById(id)
 
       if (ref) {

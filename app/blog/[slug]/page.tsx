@@ -17,6 +17,7 @@ import rehypeToc, { TocItem } from '@/lib/rehype-toc'
 import rehypeFootnoteHeading from '@/lib/rehype-footnote-heading'
 import rehypeFootnoteBacklinks from '@/lib/rehype-footnote-backlinks'
 import rehypeMarginNotes from '@/lib/rehype-margin-notes'
+import rehypeTransformIds from '@/lib/rehype-transform-ids'
 
 export function generateStaticParams() {
   const slugs = getPostSlugs()
@@ -50,6 +51,7 @@ export default async function BlogPost({ params }) {
         ],
         rehypePlugins: [
           [ rehypeCitation, rehypeCitationProps ],
+          rehypeTransformIds,
           rehypeMarginNotes,
           rehypeFootnoteHeading,
           rehypeFootnoteBacklinks,

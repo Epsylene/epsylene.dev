@@ -25,7 +25,7 @@ export default function rehypeMarginNotes() {
                 if (child.type === 'element' && child.tagName === 'a') {
                   const href = child.properties?.href as string
                   // Remove links that point back to the reference
-                  return !href?.startsWith('#user-content-fnref-')
+                  return !href?.startsWith('#fnref')
                 }
                 return true
               })
@@ -46,14 +46,14 @@ export default function rehypeMarginNotes() {
             child.type === 'element' &&
             child.tagName === 'a' &&
             typeof child.properties?.id === 'string' &&
-            child.properties.id.startsWith('user-content-fnref-')
+            child.properties.id.startsWith('fnref')
         )
 
         // Retrieve footnote
         if (link && link.properties?.id) {
           const linkId = link.properties.id as string
-          const footnoteNum = linkId.replace('user-content-fnref-', '')
-          const footnoteId = `user-content-fn-${footnoteNum}`
+          const footnoteNum = linkId.replace('fnref', '')
+          const footnoteId = `fn${footnoteNum}`
 
           const content = footnotes.get(footnoteId)
 

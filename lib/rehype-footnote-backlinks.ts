@@ -22,7 +22,7 @@ export default function rehypeFootnoteBacklinks() {
             childNode.children = childNode.children.map((footnoteItem: Element, index) => {
               if (footnoteItem.tagName === 'li') {
                 const fnId = footnoteItem.properties?.id as string
-                const refId = fnId.replace('user-content-fn-', 'user-content-fnref-')
+                const refId = fnId.replace('fn', 'fnref')
                 
                 // Get content
                 const content = footnoteItem.children.find(
@@ -39,7 +39,7 @@ export default function rehypeFootnoteBacklinks() {
                 })
 
                 // Create clickable backlink number
-                const number = refId.replace('user-content-fnref-', '')
+                const number = refId.replace('fnref', '')
                 const numberLink: Element = {
                   type: 'element',
                   tagName: 'a',
