@@ -7,6 +7,7 @@ export function MarginNoteHandler() {
     if (notes.length === 0) return
 
     let hoverTimeout: NodeJS.Timeout | null = null
+    let currentExpanded: Element | null = null
     const HOVER_PADDING = 3
 
     const isNearElement = (mouseX: number, mouseY: number, element: HTMLElement): boolean => {
@@ -17,6 +18,13 @@ export function MarginNoteHandler() {
         mouseY >= rect.top - HOVER_PADDING &&
         mouseY <= rect.bottom + HOVER_PADDING
       )
+    }
+
+    const collapseNote = (note: Element) => {
+      note.classList.remove('expanded')
+      if (currentExpanded === note) {
+        currentExpanded = null
+      }
     }
 
     // Hover a footnote reference -> expand corresponding
@@ -43,7 +51,13 @@ export function MarginNoteHandler() {
 
         const handleMouseMove = (e: MouseEvent) => {
           if (isNearElement(e.clientX, e.clientY, ref)) {
+            // Collapse another note within hover timeout
+            if (currentExpanded && currentExpanded !== note) {
+              collapseNote(currentExpanded)
+            }
+
             note.classList.add('expanded')
+            currentExpanded = note
 
             if (hoverTimeout) {
               clearTimeout(hoverTimeout)
@@ -53,7 +67,7 @@ export function MarginNoteHandler() {
             if (!note.classList.contains('expanded')) return
 
             hoverTimeout = setTimeout(() => {
-              note.classList.remove('expanded')
+              collapseNote(note)
             }, 200)
           }
         }

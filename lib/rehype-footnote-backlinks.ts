@@ -19,7 +19,7 @@ export default function rehypeFootnoteBacklinks() {
             }
 
             // Process each footnote item
-            childNode.children = childNode.children.map((footnoteItem: Element, index) => {
+            childNode.children = childNode.children.map((footnoteItem: Element) => {
               if (footnoteItem.tagName === 'li') {
                 const fnId = footnoteItem.properties?.id as string
                 const refId = fnId.replace('fn', 'fnref')
