@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
 import matter from 'gray-matter'
+import { Vibrant } from 'node-vibrant/node'
 
 export function getPostsDirectory() {
   return path.join(process.cwd(), 'posts')
@@ -65,4 +66,14 @@ export function getTextContent(node: React.ReactNode): string {
   }
 
   return ''
+}
+
+export async function extractImageColor(imagePath: string): Promise<string> {
+  const filePath = path.join(process.cwd(), 'public', imagePath)
+  const palette = await Vibrant.from(filePath).getPalette()
+  
+  // Get a muted or dark muted swatch for subtlety
+  const swatch = palette.DarkMuted || palette.Muted || palette.Vibrant
+  
+  return swatch?.hex || '#000' // fallback to black
 }
