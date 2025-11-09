@@ -9,12 +9,12 @@ function createHeading(level) {
     
     return React.createElement(
       `h${level}`,
-      { id: slug },
+      { id: slug, className: 'relative group' },
       [
         React.createElement('a', {
           href: `#${slug}`,
           key: `link-${slug}`,
-          className: 'anchor',
+          className: 'absolute invisible group-hover:visible no-underline -ml-[1em] pr-2 w-4/5 max-w-[700px] cursor-pointer after:content-["#"] after:text-neutral-300 dark:after:text-neutral-700',
         }),
       ],
       children

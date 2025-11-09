@@ -3,7 +3,7 @@ import Link from 'next/link'
 import path from 'path'
 import fs from 'fs'
 
-import { postComponents } from '@/app/components/mdx'
+import { postComponents } from '@/app/components/post'
 import { MarginNoteHandler } from '@/app/components/margin-note'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import matter from 'gray-matter'
