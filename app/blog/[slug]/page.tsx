@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { postComponents } from '@/app/components/post'
-import { MarginNoteHandler } from '@/app/components/margin-note'
+import { MarginNoteHandler } from '@/app/components/margin-notes'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import matter from 'gray-matter'
 
