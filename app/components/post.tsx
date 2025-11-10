@@ -1,35 +1,13 @@
-import { slugify, getTextContent } from '@/lib/utils'
+import { getTextContent } from '@/lib/utils'
+import createHeading from './headings'
 import Image from 'next/image'
 import React from 'react'
-
-function createHeading(level) {
-  const Heading = ({ children }) => {
-    const text = getTextContent(children)
-    const slug = slugify(text)
-    
-    return React.createElement(
-      `h${level}`,
-      { id: slug, className: 'relative group' },
-      [
-        React.createElement('a', {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: 'absolute invisible group-hover:visible no-underline -ml-[1em] pr-2 w-4/5 max-w-[700px] cursor-pointer after:content-["#"] after:text-neutral-300 dark:after:text-neutral-700',
-        }),
-      ],
-      children
-    )
-  }
-
-  Heading.displayName = `Heading${level}`
-  return Heading
-}
 
 export function PostImage({ src, caption, scale=0.8 }: { src: string; caption?: React.ReactNode; scale?: number }) {
   const alt = getTextContent(caption)
 
   return (
-    <figure className="flex flex-col items-center my-4">
+    <figure className="flex flex-col items-center my-6">
       <div className="flex flex-col items-center" style={{ width: `${scale * 100}%`}}>
         <Image 
           src={src}

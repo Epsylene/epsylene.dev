@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Info from './info'
 import React from 'react'
 import { ReactNode } from 'react'
-import { slugify, getTextContent, extractImageColor } from '@/lib/utils'
+
+import Info from './info'
+import createHeading from './headings'
+import { extractImageColor } from '@/lib/utils'
 
 interface ProjectCardProps {
   title: string
@@ -22,7 +24,6 @@ export function CardGrid({ children }: { children: ReactNode }) {
 
 export async function Card({ title, link, image, children }: ProjectCardProps) {
   const color = await extractImageColor(image)
-  // const colorDark = darkenColor(color, 0.2)
   
   return (
     <div className="break-inside-avoid mb-6">
@@ -50,39 +51,6 @@ export async function Card({ title, link, image, children }: ProjectCardProps) {
       </div>
     </div>
   )
-}
-
-function createHeading(level) {
-  const Heading = ({ children }) => {
-    const text = getTextContent(children)
-    const slug = slugify(text)
-
-    // Font sizes based on heading level
-    const size = {
-      1: 'text-4xl',
-      2: 'text-3xl',
-      3: 'text-2xl',
-      4: 'text-xl',
-      5: 'text-lg',
-      6: 'text-base',
-    }
-    
-    return React.createElement(
-      `h${level}`,
-      { id: slug, className: `relative group ${size[level]} mb-6` },
-      [
-        React.createElement('a', {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: 'absolute invisible group-hover:visible no-underline -ml-[1em] pr-2 w-4/5 max-w-[700px] cursor-pointer after:content-["#"] after:text-neutral-300 dark:after:text-neutral-700',
-        }),
-      ],
-      children
-    )
-  }
-
-  Heading.displayName = `Heading${level}`
-  return Heading
 }
 
 export const projectComponents = {

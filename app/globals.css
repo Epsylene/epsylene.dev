@@ -68,28 +68,12 @@ body {
   box-shadow: 0 2px #009ef9;
 }
 
-.prose p {
-  @apply my-4 text-neutral-800 dark:text-neutral-200;
-}
-
-.prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
-}
-
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply mt-10;
 }
 
-.prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
-}
-
-.prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2;
-}
-
-.prose strong {
-  @apply font-medium;
+.prose p {
+  @apply mb-4;
 }
 
 .prose ul {
@@ -98,6 +82,10 @@ body {
 
 .prose ol {
   @apply list-decimal pl-6;
+}
+
+.prose li {
+  @apply mb-2;
 }
 
 .prose > :first-child {
