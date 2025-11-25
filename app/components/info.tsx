@@ -27,7 +27,7 @@ export default function Info({ title, children }: { title: string, children: Rea
         </svg>
       </button>
       {isOpen && (
-        <div className="ml-3 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mt-3">
+        <div className="ml-3 [&>ul,ol]:ml-6 [&>ul,ol]:mt-3">
           {children}
         </div>
       )}

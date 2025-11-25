@@ -76,6 +76,18 @@ body {
   @apply mb-4;
 }
 
+ul {
+  @apply list-disc;
+}
+
+ol {
+  @apply list-decimal;
+}
+
+.no-list-style {
+  @apply list-none;
+}
+
 .prose ul {
   @apply list-disc pl-6;
 }

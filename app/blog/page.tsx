@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center mb-[5%]">
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-3 no-list-style">
           {info.map((post) => (
             <li key={post.slug}>
               <span className="text-neutral-500 mr-3">
