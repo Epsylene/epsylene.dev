@@ -133,8 +133,18 @@ table {
   /* @apply hidden; */
 }
 
-.footnotes li {
-  margin-bottom: 0.5em;
+.footnotes {
+  @apply mb-2 text-[16px];
+}
+
+.footnote-number {
+  font-size: 16px !important;
+}
+
+.footnotes #notes-et-references {
+  visibility: hidden;
+  height: 0;
+  margin: 0.5em;
 }
 
 .footnote-number {
