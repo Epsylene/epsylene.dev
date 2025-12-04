@@ -11,8 +11,13 @@ export function getPostsDirectory() {
 export function getPostSlugs() {
   // Read all files in the posts folder
   const postsDirectory = getPostsDirectory()
-  console.log(postsDirectory)
-  const entries = fs.readdirSync(postsDirectory, { withFileTypes: true })
+  
+  let entries
+  try {
+    entries = fs.readdirSync(postsDirectory, { withFileTypes: true })
+  } catch (error) {
+    return []
+  }
 
   // Remove .mdx extension to get slugs
   return entries
