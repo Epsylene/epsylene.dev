@@ -57,12 +57,12 @@ export async function Card({ title, link, image, children }: ProjectCardProps) {
             <h3 className="px-4 m-0">{title}</h3>
           )}
       </div>
-      <div className="relative w-full mx-auto aspect-[4/3]">
+      <div className="relative w-full mx-auto aspect-[4/3] overflow-hidden">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 hover:scale-110"
         />
       </div>
       <div
