@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { Word } from '@/app/components/word'
+import { Word, WordLine } from '@/app/components/word'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
@@ -24,6 +24,7 @@ export default async function WordsPage() {
     source,
     components: {
       Word,
+      WordLine
     },
     options: {
       mdxOptions: {
@@ -46,9 +47,9 @@ export default async function WordsPage() {
           </Link>
         </div>
       </section>
-      <div className="flex flex-wrap gap-3 text-lg">
-        {content}
-      </div>
+        <div className="space-y-2">
+          {content}
+        </div>
     </div>
   )
 }

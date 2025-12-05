@@ -2,14 +2,13 @@ import fs from 'fs'
 import path from 'path'
 
 const inputFile = process.argv[2]
+const outputFile = process.argv[3] || 'words.mdx'
 
 if (!inputFile) {
   console.error('❌ Please provide an input file')
   console.log('Usage: npx tsx scripts/transformWords.ts <input-file>')
   process.exit(1)
 }
-
-const outputFile = 'words.mdx'
 
 function transformWords() {
   const filePath = path.join(process.cwd(), inputFile)
@@ -20,14 +19,24 @@ function transformWords() {
   }
   
   const content = fs.readFileSync(filePath, 'utf-8')
-  
+  let groupCounter = 0
+
   // Replace ### headers with <Word> components
-  const transformed = content.replace(
+  const transformed = '<WordLine>\n' + content.replace(
     /### (.+?)\n([\s\S]*?)(?=\n### |$)/g,
     (_, title, definition) => {
-      return `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
+      let component = `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
+      
+      groupCounter += title.trim().length
+      if (groupCounter / 120 > 1) {
+        groupCounter = 0
+        component = `</WordLine>\n\n<WordLine>\n${component}`
+      }
+
+      console.log(title.trim(), groupCounter)
+      return component
     }
-  )
+  ) + '</WordLine>'
   
   fs.writeFileSync(path.join(process.cwd(), outputFile), transformed, 'utf-8')
   console.log(`✅ Transformed ${inputFile} → ${outputFile}`)
