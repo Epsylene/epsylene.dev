@@ -10,7 +10,7 @@ export default function Home() {
         <div className="space-x-12 text-xl text-gray-300 [&>a]:hover:underline">
           <Link href="/projects">Projects</Link>
           {/* <Link href="/blog">Blog</Link> */}
-          {/* <Link href="/words">Words</Link> */}
+          <Link href="/words">Words</Link>
         </div>
       </div>
     </div>
