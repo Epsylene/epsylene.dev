@@ -30,12 +30,22 @@ interface WordProps {
   children: ReactNode
 }
 
-// Global state to track if any modal is open (using counter for multiple modals)
-let openModalCount = 0
-const modalListeners = new Set<() => void>()
+// Global state to track which modal is currently open
+let openModalId: string | null = null
+const modalListeners = new Map<string, (shouldOpen: boolean) => void>()
 
-function notifyModalStateChange() {
-  modalListeners.forEach(listener => listener())
+const stateListeners = new Set<() => void>()
+
+function notifyModalStateChange(triggeringId: string) {
+  // Close all other modals
+  modalListeners.forEach((listener, id) => {
+    if (id !== triggeringId) {
+      listener(false)
+    }
+  })
+  openModalId = triggeringId
+  // Notify all components about state change
+  stateListeners.forEach(listener => listener())
 }
 
 export function Word({ title, children }: WordProps) {
@@ -46,30 +56,35 @@ export function Word({ title, children }: WordProps) {
   
   const id = slugify(title)
 
-  // Listen if a modal is open
+  // Register this modal and listen for external close signals
   useEffect(() => {
-    const listener = () => setIsAnyModalOpen(openModalCount > 0)
-    modalListeners.add(listener)
-    listener() // Initialize state
-    return () => {
-      modalListeners.delete(listener)
-    }
-  }, [])
-
-  // Update global modal count when this modal opens/closes
-  useEffect(() => {
-    if (isOpen) {
-      openModalCount++
-      notifyModalStateChange()
+    const externalCloseListener = (shouldOpen: boolean) => {
+      setIsOpen(shouldOpen)
     }
     
+    modalListeners.set(id, externalCloseListener)
+    const stateListener = () => setIsAnyModalOpen(openModalId !== null)
+    stateListeners.add(stateListener)
+    stateListener() // Initialize
+    
     return () => {
-      if (isOpen) {
-        openModalCount--
-        notifyModalStateChange()
-      }
+      modalListeners.delete(id)
+      stateListeners.delete(stateListener)
     }
-  }, [isOpen])
+  }, [id])
+
+  // Update global modal state when this modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      notifyModalStateChange(id)
+      setIsAnyModalOpen(true)
+    } else if (openModalId === id) {
+      openModalId = null
+      setIsAnyModalOpen(false)
+      // Notify all listeners that no modal is open
+      stateListeners.forEach(listener => listener())
+    }
+  }, [isOpen, id])
 
   // Check if this word should be opened based on URL hash
   useEffect(() => {
