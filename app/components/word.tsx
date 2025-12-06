@@ -123,10 +123,8 @@ export function Word({ title, children }: WordProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [isOpen, isAnyModalOpen])
 
-  // Default state: word with ID for linking
-  if (!isOpen) {
-    return (
-      <a href={`#${id}`} className="inline-block shrink-0">
+  const word = (
+    <a href={`#${id}`} className="inline-block shrink-0">
         <button
           id={id}
           ref={buttonRef}
@@ -148,37 +146,44 @@ export function Word({ title, children }: WordProps) {
           </span>
         </button>
       </a>
-    )
+  )
+
+  // Default state: word with ID for linking
+  if (!isOpen) {
+    return word
   }
 
   // Open state: overlay popup with greyed-out background
   return (
-    <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center p-8 z-50 overflow-hidden"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setIsOpen(false)
-          window.history.pushState(null, '', window.location.pathname)
-        }
-      }}
-    >
-      <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full p-6 max-h-[35em] overflow-scroll">
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <h2 className="text-2xl font-bold text-blue-600">{title}</h2>
-          <button
-            onClick={() => {
-              setIsOpen(false)
-              window.history.pushState(null, '', window.location.pathname)
-            }}
-            className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0"
-          >
-            ×
-          </button>
-        </div>
-        <div className="prose text-wrap text-black">
-          {children}
+    <>
+      {word}
+      <div 
+        className="fixed inset-0 bg-black/50 flex items-center justify-center p-8 z-50 overflow-hidden"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setIsOpen(false)
+            window.history.pushState(null, '', window.location.pathname)
+          }
+        }}
+      >
+        <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full p-6 max-h-[35em] overflow-scroll">
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <h2 className="text-2xl font-bold text-blue-600">{title}</h2>
+            <button
+              onClick={() => {
+                setIsOpen(false)
+                window.history.pushState(null, '', window.location.pathname)
+              }}
+              className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0"
+            >
+              ×
+            </button>
+          </div>
+          <div className="prose text-wrap text-black">
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
