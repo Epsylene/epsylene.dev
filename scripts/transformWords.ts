@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { slugify } from '@/lib/utils'
 
 const inputFile = process.argv[2]
 const outputFile = process.argv[3] || 'words.mdx'
@@ -42,7 +43,7 @@ function transformWords() {
   // Replace [[#word]] with [word](#word) links
   transformed = transformed.replace(
     /\[\[#([^\]]+)\]\]/g,
-    (_, word) => `[${word}](#${word})`
+    (_, word) => `[${word}](#${slugify(word)})`
   )
   
   fs.writeFileSync(path.join(process.cwd(), outputFile), transformed, 'utf-8')
