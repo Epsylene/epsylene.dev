@@ -89,7 +89,13 @@ export function Word({ title, children }: WordProps) {
   // Check if this word should be opened based on URL hash
   useEffect(() => {
     const checkHash = () => {
-      if (window.location.hash === `#${id}`) {
+      const { hash } = window.location
+      if (!hash) {
+        setIsOpen(false)
+        return
+      }
+
+      if (hash === `#${id}`) {
         setIsOpen(true)
       }
     }
