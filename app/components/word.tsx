@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import { Children, ReactElement, ReactNode, isValidElement, useEffect, useRef, useState } from 'react'
 
 function slugify(str: string) {
   return str
@@ -22,6 +22,115 @@ export function WordLine({ children }: WordLineProps) {
     <div className="flex gap-3 justify-center text-lg overflow-visible whitespace-nowrap">
       {children}
     </div>
+  )
+}
+
+interface WordsSoupProps {
+  children: ReactNode
+}
+
+export function WordsSoup({ children }: WordsSoupProps) {
+  const [lines, setLines] = useState<ReactNode[][]>([[]])
+  const containerRef = useRef<HTMLDivElement>(null)
+  const measuringRef = useRef<HTMLDivElement>(null)
+  
+  // Extract word titles from Word components
+  const getWordTitles = (items: ReactNode[]): string[] => {
+    return Children.toArray(items)
+      .filter(isValidElement)
+      .map(child => (child.props as { title?: string }).title)
+      .filter(Boolean) as string[]
+  }
+  
+  useEffect(() => {
+    if (!containerRef.current || !measuringRef.current) return
+    
+    const calculateLines = () => {
+      const container = containerRef.current
+      const measuring = measuringRef.current
+      if (!container || !measuring) return
+      
+      const containerWidth = container.offsetWidth
+      const gap = 12 // gap-3 = 12px
+      
+      // Extract child array and filter out newlines and whitespace
+      const childArray = Children.toArray(children).filter(child => {
+        if (typeof child === 'string') {
+          return child.trim() !== ''
+        }
+        return isValidElement(child)
+      }) as ReactElement[]
+      
+      // Get all measuring span elements (should match childArray length now)
+      const wordElements = Array.from(measuring.children) as HTMLElement[]
+      
+      const newLines: number[][] = []
+      let currentLine: number[] = []
+      let currentWidth = 0
+      
+      wordElements.forEach((element, index) => {
+        const wordWidth = element.offsetWidth
+        
+        const widthWithGap = currentWidth + (currentLine.length > 0 ? gap : 0) + wordWidth
+        
+        if (widthWithGap > containerWidth && currentLine.length > 0) {
+          newLines.push(currentLine)
+          currentLine = [index]
+          currentWidth = wordWidth
+        } else {
+          currentLine.push(index)
+          currentWidth = widthWithGap
+        }
+      })
+      
+      if (currentLine.length > 0) {
+        newLines.push(currentLine)
+      }
+      
+      const groupedLines = newLines.map(indices =>
+        indices.map(i => childArray[i]).filter(Boolean)
+      )
+      
+      setLines(groupedLines)
+    }
+    
+    setTimeout(calculateLines, 0)
+    
+    // Listen to window resize
+    window.addEventListener('resize', calculateLines)
+    
+    // Use ResizeObserver to detect container size changes (handles zoom)
+    const resizeObserver = new ResizeObserver(calculateLines)
+    resizeObserver.observe(containerRef.current)
+
+    return () => {
+      window.removeEventListener('resize', calculateLines)
+      resizeObserver.disconnect()
+    }
+  }, [children])
+  
+    const wordTitles = getWordTitles(Children.toArray(children))
+  
+  return (
+    <>
+      <div 
+        ref={measuringRef}
+        className="fixed top-0 left-0 opacity-0 pointer-events-none flex gap-3 text-lg whitespace-nowrap"
+        aria-hidden="true"
+      >
+        {wordTitles.map((title, i) => (
+          <span key={i}>{title}</span>
+        ))}
+      </div>
+      
+      <div ref={containerRef} className="space-y-2">
+        {lines.map((line, i) => (
+          <WordLine key={i}>
+            {line}
+          </WordLine>
+        ))}
+      </div>
+    </>
   )
 }
 

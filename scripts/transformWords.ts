@@ -20,25 +20,16 @@ function transformWords() {
   }
   
   const content = fs.readFileSync(filePath, 'utf-8')
-  let groupCounter = 0
 
   // Replace ### headers with <Word> components, wrapping every
   // ~120 characters in <WordLine>
-  let transformed = '<WordLine>\n' + content.replace(
+  let transformed = content.replace(
     /### (.+?)\n([\s\S]*?)(?=\n### |$)/g,
     (_, title, definition) => {
-      let component = `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
-      
-      groupCounter += title.trim().length
-      if (groupCounter / 120 > 1) {
-        groupCounter = 0
-        component = `</WordLine>\n\n<WordLine>\n${component}`
-      }
-
-      console.log(title.trim(), groupCounter)
-      return component
+      console.log(title.trim())
+      return `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
     }
-  ) + '</WordLine>'
+  )
 
   // Replace [[#word]] with [word](#word) links
   transformed = transformed.replace(

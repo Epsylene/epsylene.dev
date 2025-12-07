@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { Word, WordLine } from '@/app/components/word'
+import { Word, WordsSoup } from '@/app/components/word'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
@@ -18,13 +18,12 @@ export default async function WordsPage() {
   const file = fs.readFileSync(filePath, 'utf-8')
 
   // Parse frontmatter
-  const { data: meta, content: source } = matter(file)
+  const { content: source } = matter(file)
 
   const { content } = await compileMDX({
     source,
     components: {
-      Word,
-      WordLine
+      Word
     },
     options: {
       mdxOptions: {
@@ -47,9 +46,9 @@ export default async function WordsPage() {
           </Link>
         </div>
       </section>
-        <div className="space-y-2">
+        <WordsSoup>
           {content}
-        </div>
+        </WordsSoup>
     </div>
   )
 }
