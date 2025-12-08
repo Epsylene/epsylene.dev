@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { projectComponents } from '@/app/components/projects'
+import { projectComponents } from '@/app/projects/components/card'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 

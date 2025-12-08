@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { ReactNode } from 'react'
 
 import Info from './info'
-import createHeading from './headings'
+import createHeading from '@/app/components/headings'
 import { extractImageColor } from '@/lib/utils'
 
 interface ProjectCardProps {

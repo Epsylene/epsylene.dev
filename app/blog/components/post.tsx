@@ -1,5 +1,5 @@
 import { getTextContent } from '@/lib/utils'
-import createHeading from './headings'
+import createHeading from '@/app/components/headings'
 import Image from 'next/image'
 import React from 'react'
 
