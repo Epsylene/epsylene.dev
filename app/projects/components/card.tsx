@@ -72,7 +72,7 @@ export async function Card({ title, link, image, children }: ProjectCardProps) {
         </Link>
       </div>
       <div
-        className="p-6 pt-4 pb-3 rounded-b-md [&>p]:mb-3 [&>p]:leading-relaxed [&>ul,ol]:mb-3 [&>ul,ol]:ml-5 [&>ul,ol]:space-y-1 [&>ul>li]:leading-relaxed [&>*:last-child]:mb-2"
+        className="p-6 pt-4 pb-3 rounded-b-md [&>p]:mb-3 [&>p]:leading-relaxed [&>ul,ol]:mb-3 [&>ul,ol]:ml-5 [&>ul,ol]:space-y-1 [&>ul>li]:leading-relaxed [&>*:last-child]:mb-2 [&_a]:underline [&_a]:font-bold [&_a:hover]:opacity-80"
         style={{ backgroundColor: `${color}` }}
       >
         {children}
