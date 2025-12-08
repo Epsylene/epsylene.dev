@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { Word, WordsSoup } from '@/app/components/word'
+import { Word, WordsSoup } from '@/app/words/components/word'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
