@@ -20,8 +20,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-family: "Berkeley Mono", "JetBrains Mono", "Roboto Mono", monospace;
   font-size: large;
+}
+
+::selection {
+  background-color: #fffba0;
+  color: #0d122b;
 }
 
 /*
