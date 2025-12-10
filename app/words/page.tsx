@@ -4,7 +4,8 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { Word, WordsSoup } from '@/app/words/components/word'
+import { Word } from '@/app/words/components/word'
+import { WordsContent } from '@/app/words/components/words-content'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
@@ -36,7 +37,7 @@ export default async function WordsPage() {
 
   return (
     <div className="container max-w-7xl mx-auto px-4 py-8">
-      <section className="mb-8">
+      <section className="mb-0">
         <h1 className="text-5xl">
           Words
         </h1>
@@ -46,9 +47,7 @@ export default async function WordsPage() {
           </Link>
         </div>
       </section>
-        <WordsSoup>
-          {content}
-        </WordsSoup>
+      <WordsContent content={content} />
     </div>
   )
 }

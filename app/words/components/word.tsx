@@ -1,5 +1,5 @@
 'use client'
-import { Children, ReactElement, ReactNode, isValidElement, useEffect, useRef, useState } from 'react'
+import { Children, ReactElement, ReactNode, isValidElement, useEffect, useRef, useState, useCallback } from 'react'
 
 function slugify(str: string) {
   return str
@@ -27,9 +27,10 @@ export function WordLine({ children }: WordLineProps) {
 
 interface WordsSoupProps {
   children: ReactNode
+  searchQuery?: string
 }
 
-export function WordsSoup({ children }: WordsSoupProps) {
+export function WordsSoup({ children, searchQuery = '' }: WordsSoupProps) {
   const [lines, setLines] = useState<ReactNode[][]>([[]])
   const containerRef = useRef<HTMLDivElement>(null)
   const measuringRef = useRef<HTMLDivElement>(null)
@@ -42,6 +43,29 @@ export function WordsSoup({ children }: WordsSoupProps) {
       .filter(Boolean) as string[]
   }
   
+  // Filter children based on search query
+  const getFilteredChildren = useCallback((items: ReactNode[]): ReactNode[] => {
+    if (!searchQuery.trim()) return items
+    
+    const query = searchQuery.toLowerCase()
+    const filtered = Children.toArray(items)
+      .filter(isValidElement)
+      .filter(child => {
+        const title = (child.props as { title?: string }).title || ''
+        const slugifiedTitle = slugify(title)
+        return slugifiedTitle.startsWith(query)
+      })
+    
+    // Sort alphabetically by slugified title
+    return filtered.sort((a, b) => {
+      const titleA = (a.props as { title?: string }).title || ''
+      const titleB = (b.props as { title?: string }).title || ''
+      const slugA = slugify(titleA)
+      const slugB = slugify(titleB)
+      return slugA.localeCompare(slugB)
+    })
+  }, [searchQuery])
+  
   useEffect(() => {
     if (!containerRef.current || !measuringRef.current) return
     
@@ -53,8 +77,11 @@ export function WordsSoup({ children }: WordsSoupProps) {
       const containerWidth = container.offsetWidth
       const gap = 12 // gap-3 = 12px
       
+      // Get filtered children first
+      const filteredChildList = getFilteredChildren(Children.toArray(children))
+      
       // Extract child array and filter out newlines and whitespace
-      const childArray = Children.toArray(children).filter(child => {
+      const childArray = filteredChildList.filter(child => {
         if (typeof child === 'string') {
           return child.trim() !== ''
         }
@@ -107,9 +134,10 @@ export function WordsSoup({ children }: WordsSoupProps) {
       window.removeEventListener('resize', calculateLines)
       resizeObserver.disconnect()
     }
-  }, [children])
+  }, [children, searchQuery, getFilteredChildren])
   
-    const wordTitles = getWordTitles(Children.toArray(children))
+  const filteredChildren = getFilteredChildren(Children.toArray(children))
+  const wordTitles = getWordTitles(filteredChildren)
   
   return (
     <>
@@ -155,6 +183,17 @@ function notifyModalStateChange(triggeringId: string) {
   openModalId = triggeringId
   // Notify all components about state change
   stateListeners.forEach(listener => listener())
+}
+
+export function subscribeToModalState(callback: (isOpen: boolean) => void) {
+  const listener = () => callback(openModalId !== null)
+  stateListeners.add(listener)
+  // Call immediately with current state
+  callback(openModalId !== null)
+  
+  return () => {
+    stateListeners.delete(listener)
+  }
 }
 
 export function Word({ title, children }: WordProps) {
