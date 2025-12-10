@@ -259,7 +259,7 @@ export function Word({ title, children }: WordProps) {
           id={id}
           ref={buttonRef}
           onClick={() => setIsOpen(true)}
-          className="hover:text-blue-600 transition-colors inline-flex items-center justify-center"
+          className="hover:text-[#ff2957] text-[#c7bebe] transition-colors inline-flex items-center justify-center"
           style={{
             minWidth: '1em',
             minHeight: '1.2em',
@@ -288,7 +288,7 @@ export function Word({ title, children }: WordProps) {
     <>
       {word}
       <div 
-        className="fixed inset-0 bg-black/50 flex items-center justify-center p-8 z-50 overflow-hidden"
+        className="fixed inset-0 flex items-start justify-center p-8 z-50 overflow-scroll bg-[#00000082]"
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             setIsOpen(false)
@@ -296,20 +296,20 @@ export function Word({ title, children }: WordProps) {
           }
         }}
       >
-        <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full p-6 max-h-[35em] overflow-scroll">
+        <div className="bg-[#131418] text-[#c7bebe] shadow-xl max-w-3xl w-full p-6 my-auto">
           <div className="flex items-start justify-between gap-4 mb-4">
-            <h2 className="text-2xl font-bold text-blue-600">{title}</h2>
+            <h2 className="text-3xl text-[#ff2957] font-bold">{title}</h2>
             <button
               onClick={() => {
                 setIsOpen(false)
                 window.history.pushState(null, '', window.location.pathname)
               }}
-              className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0"
+              className="text-gray-400 hover:text-gray-200 text-2xl leading-none shrink-0"
             >
               ×
             </button>
           </div>
-          <div className="prose text-wrap text-black">
+          <div className="prose-lg prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline text-[#c7bebe] leading-7 text-wrap">
             {children}
           </div>
         </div>

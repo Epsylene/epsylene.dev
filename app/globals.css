@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #131418;
 }
 
 @theme inline {
@@ -61,7 +62,7 @@ body {
 /*
  * Prose styles
  */
-.prose {
+/* .prose {
   max-width: 38em;
 }
 
@@ -79,7 +80,7 @@ body {
 
 .prose p {
   @apply mb-4;
-}
+} */
 
 ul {
   @apply list-disc;
@@ -93,7 +94,7 @@ ol {
   @apply list-none;
 }
 
-.prose ul {
+/* .prose ul {
   @apply list-disc pl-6;
 }
 
@@ -106,10 +107,10 @@ ol {
 }
 
 .prose > :first-child {
-  /* Override removing top margin, causing layout shift */
+  Override removing top margin, causing layout shift
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
-}
+} */
 
 table {
   display: block;

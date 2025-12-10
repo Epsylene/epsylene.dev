@@ -41,7 +41,7 @@ export default async function WordsPage() {
           Words
         </h1>
         <div className="mt-0">
-          <Link href='/' className="text-neutral-600 dark:text-neutral-300 hover:underline">
+          <Link href='/' className="text-neutral-300 hover:underline">
             « Back
           </Link>
         </div>
