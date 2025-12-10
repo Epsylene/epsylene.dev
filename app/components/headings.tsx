@@ -19,13 +19,13 @@ export default function createHeading(level) {
     return React.createElement(
       `h${level}`,
       { id: slug, className: `relative group ${size[level]} mb-6` },
-      [
-        React.createElement('a', {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: 'absolute invisible group-hover:visible no-underline -ml-[1em] pr-2 w-4/5 max-w-[700px] cursor-pointer after:content-["#"] after:text-neutral-300 dark:after:text-neutral-700',
-        }),
-      ],
+      React.createElement('a', {
+        href: `#${slug}`,
+        key: `link-${slug}`,
+        className: 'absolute -left-6 pr-2 text-[#ff2957] no-underline cursor-pointer hover:underline',
+      }, React.createElement('span', {
+        className: 'invisible group-hover:visible',
+      }, '#')),
       children
     )
   }
