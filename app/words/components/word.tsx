@@ -309,7 +309,7 @@ export function Word({ title, children }: WordProps) {
               ×
             </button>
           </div>
-          <div className="prose-lg prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline text-[#c7bebe] leading-7 text-wrap">
+          <div className="prose-lg prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline prose-blockquote:border-l-4 prose-blockquote:border-red-400/65 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-[0.96em] prose-blockquote:leading-6 text-[#c7bebe] leading-7 text-wrap">
             {children}
           </div>
         </div>

@@ -20,12 +20,14 @@ function transformWords() {
   }
   
   const content = fs.readFileSync(filePath, 'utf-8')
+  let wordCount = 0
 
   // Replace ### headers with <Word> components, wrapping every
   // ~120 characters in <WordLine>
   let transformed = content.replace(
     /### (.+?)\n([\s\S]*?)(?=\n### |$)/g,
     (_, title, definition) => {
+      wordCount += 1
       console.log(title.trim())
       return `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
     }
@@ -38,7 +40,7 @@ function transformWords() {
   )
   
   fs.writeFileSync(path.join(process.cwd(), outputFile), transformed, 'utf-8')
-  console.log(`✅ Transformed ${inputFile} → ${outputFile}`)
+  console.log(`✅ Transformed ${inputFile} → ${outputFile} (${wordCount} words)`)
 }
 
 transformWords()
