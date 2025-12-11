@@ -343,20 +343,20 @@ export function Word({ title, children }: WordProps) {
           }
         }}
       >
-        <div className="bg-[#131418] text-[#c7bebe] shadow-xl max-w-3xl w-full p-6 my-auto">
+        <div className="bg-[#131418] text-[#c7bebe] shadow-xl max-w-3xl w-full p-6 my-auto portrait:text-sm">
           <div className="flex items-start justify-between gap-4 mb-4">
-            <h2 className="text-3xl text-[#ff2957] font-bold" style={{ wordSpacing: '-0.2em' }}>{title}</h2>
+            <h2 className="text-3xl portrait:text-2xl text-[#ff2957] font-bold" style={{ wordSpacing: '-0.2em' }}>{title}</h2>
             <button
               onClick={() => {
                 setIsOpen(false)
                 window.history.pushState(null, '', window.location.pathname)
               }}
-              className="text-gray-400 hover:text-gray-200 text-2xl leading-none shrink-0"
+              className="text-gray-400 hover:text-gray-200 text-2xl portrait:text-xl leading-none shrink-0"
             >
               ×
             </button>
           </div>
-          <div className="prose-lg prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline prose-blockquote:border-l-4 prose-blockquote:border-red-400/65 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-[0.96em] prose-blockquote:leading-6 prose-h4:text-2xl prose-h4:font-bold text-[#c7bebe] leading-7 text-wrap">
+          <div className="prose-lg portrait:prose-base prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline prose-blockquote:border-l-4 prose-blockquote:border-red-400/65 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-[0.96em] prose-blockquote:leading-6 prose-h4:text-2xl prose-h4:font-bold text-[#c7bebe] leading-7 text-wrap">
             {children}
           </div>
         </div>
