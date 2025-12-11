@@ -315,7 +315,8 @@ export function Word({ title, children }: WordProps) {
             style={{
               fontSize: `${scale}em`,
               transition: 'font-size 0.1s ease-out',
-              lineHeight: 1
+              lineHeight: 1,
+              wordSpacing: '-0.25em'
             }}
           >
             {title}
@@ -344,7 +345,7 @@ export function Word({ title, children }: WordProps) {
       >
         <div className="bg-[#131418] text-[#c7bebe] shadow-xl max-w-3xl w-full p-6 my-auto">
           <div className="flex items-start justify-between gap-4 mb-4">
-            <h2 className="text-3xl text-[#ff2957] font-bold">{title}</h2>
+            <h2 className="text-3xl text-[#ff2957] font-bold" style={{ wordSpacing: '-0.2em' }}>{title}</h2>
             <button
               onClick={() => {
                 setIsOpen(false)
