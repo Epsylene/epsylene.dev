@@ -226,9 +226,13 @@ export function Word({ title, children }: WordProps) {
     if (isOpen) {
       notifyModalStateChange(id)
       setIsAnyModalOpen(true)
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden'
     } else if (openModalId === id) {
       openModalId = null
       setIsAnyModalOpen(false)
+      // Restore body scroll when modal is closed
+      document.body.style.overflow = ''
       // Notify all listeners that no modal is open
       stateListeners.forEach(listener => listener())
     }
@@ -293,11 +297,14 @@ export function Word({ title, children }: WordProps) {
   }, [isOpen, isAnyModalOpen])
 
   const word = (
-    <a href={`#${id}`} className="inline-block shrink-0">
+    <a href={`#${id}`} className="inline-block shrink-0" onClick={(e) => e.preventDefault()}>
         <button
           id={id}
           ref={buttonRef}
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setIsOpen(true)
+            window.history.pushState(null, '', `#${id}`)
+          }}
           className="hover:text-[#ff2957] text-[#c7bebe] transition-colors inline-flex items-center justify-center"
           style={{
             minWidth: '1em',
@@ -327,7 +334,7 @@ export function Word({ title, children }: WordProps) {
     <>
       {word}
       <div 
-        className="fixed inset-0 flex items-start justify-center p-8 z-50 overflow-scroll bg-[#00000082]"
+        className="fixed inset-0 flex items-start justify-center p-8 z-50 overflow-y-auto bg-[#00000082]"
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             setIsOpen(false)
