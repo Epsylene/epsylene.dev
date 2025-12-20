@@ -68,6 +68,16 @@ function convertInlineHtmlToJsx(input: string): string {
   return output
 }
 
+function getWordTitles(text: string): string[] {
+  const titles: string[] = []
+  const reDouble = /<Word\s+title="([^"]+)"/g
+  const reSingle = /<Word\s+title='([^']+)'/g
+  let m: RegExpExecArray | null
+  while ((m = reDouble.exec(text))) titles.push(m[1].trim())
+  while ((m = reSingle.exec(text))) titles.push(m[1].trim())
+  return titles
+}
+
 function transformWords() {
   const filePath = path.join(process.cwd(), inputFile)
   const outputPath = path.join(process.cwd(), outputFile)
@@ -78,16 +88,16 @@ function transformWords() {
   }
   
   const content = fs.readFileSync(filePath, 'utf-8')
-  let wordCount = 0
+  const newTitles: string[] = []
 
   // Replace ### headers with <Word> components, wrapping every
   // ~120 characters in <WordLine>
   let transformed = content.replace(
     /### (.+?)\n([\s\S]*?)(?=\n### |$)/g,
     (_, title, definition) => {
-      wordCount += 1
-      console.log(title.trim())
-      return `<Word title="${title.trim()}">\n${definition.trim()}\n</Word>\n`
+      const t = title.trim()
+      newTitles.push(t)
+      return `<Word title="${t}">\n${definition.trim()}\n</Word>\n`
     }
   )
 
@@ -100,12 +110,19 @@ function transformWords() {
   // Convert inline HTML attributes to JSX: class -> className, style="..." -> style={{ ... }}
   transformed = convertInlineHtmlToJsx(transformed)
   
-  // Compute how many words were added compared to previous output
-  const countWords = (text: string) => (text.match(/<Word\s+title=/g) || []).length
-  const previousCount = fs.existsSync(outputPath)
-    ? countWords(fs.readFileSync(outputPath, 'utf-8'))
-    : 0
-  const newCount = wordCount
+  // Compute and log which words were added compared to previous output
+  const previousText = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf-8') : ''
+  const previousTitles = previousText ? getWordTitles(previousText) : []
+  const prevSet = new Set(previousTitles)
+  const addedTitles = newTitles.filter((t) => !prevSet.has(t))
+
+  // Log added words (with + prefix) before the final summary
+  if (addedTitles.length > 0) {
+    for (const t of addedTitles) console.log(`+ ${t}`)
+  }
+
+  const previousCount = previousTitles.length
+  const newCount = newTitles.length
   const addedCount = Math.max(0, newCount - previousCount)
 
   fs.writeFileSync(outputPath, transformed, 'utf-8')
