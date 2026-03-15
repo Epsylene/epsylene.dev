@@ -4,17 +4,20 @@
 :root {
   --background: #ffffff;
   --foreground: #131418;
+  --gray: #a8a095;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-gray: var(--gray);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #181a1b;
+    --foreground: #e3e1de;
+    --gray: #a8a095;
   }
 }
 
@@ -27,6 +30,33 @@ body {
 ::selection {
   background-color: #fffba0;
   color: #0d122b;
+}
+
+@layer components {
+  .text a {
+    @apply text-red-400 border-b-[1px];
+  }
+
+  .text a:hover {
+    @apply bg-red-400 text-white border-b-[2px] border-red-400;
+  }
+
+  .text ul {
+    list-style: none;
+  }
+
+  .text li {
+    margin-left: 1.5em;
+     /* Add a custom bullet using the ::before pseudo-element */
+    position: relative;
+  }
+
+  .text li::before {
+    content: "*";
+    position: absolute;
+    left: -1.5em;
+    color: var(--gray);
+  }
 }
 
 /*
@@ -58,58 +88,9 @@ body {
   font-weight: 600;
 }
 
-/*
- * Prose styles
- */
-/* .prose {
-  max-width: 38em;
-}
-
-.prose a {
-  color: #009ef9;
-}
-
-.prose a:not(.no-underline):hover {
-  box-shadow: 0 2px #009ef9;
-}
-
-.prose h2 {
-  @apply mt-10;
-}
-
-.prose p {
-  @apply mb-4;
-} */
-
-ul {
-  @apply list-disc;
-}
-
-ol {
-  @apply list-decimal;
-}
-
 .no-list-style {
   @apply list-none;
 }
-
-/* .prose ul {
-  @apply list-disc pl-6;
-}
-
-.prose ol {
-  @apply list-decimal pl-6;
-}
-
-.prose li {
-  @apply mb-2;
-}
-
-.prose > :first-child {
-  Override removing top margin, causing layout shift
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
-} */
 
 table {
   display: block;

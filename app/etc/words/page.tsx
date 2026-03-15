@@ -4,8 +4,8 @@ import path from 'path'
 import fs from 'fs'
 
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { Word } from '@/app/words/components/word'
-import { WordsContent } from '@/app/words/components/words-content'
+import { Word } from './components/word'
+import { WordsContent } from './components/words-content'
 import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
@@ -42,7 +42,7 @@ export default async function WordsPage() {
           Words
         </h1>
         <div className="mt-0">
-          <Link href='/' className="text-neutral-300 hover:underline">
+          <Link href='/etc' className="text-neutral-300 hover:underline">
             « Back
           </Link>
         </div>

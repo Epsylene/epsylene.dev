@@ -1,7 +1,7 @@
 import React from 'react'
 import { slugify, getTextContent } from '@/lib/utils'
 
-export default function createHeading(level) {
+export function createHeading(level) {
   const Heading = ({ children }) => {
     const text = getTextContent(children)
     const slug = slugify(text)
@@ -40,7 +40,7 @@ export function Heading({ children }: { children: React.ReactNode }) {
   
   return (
     <h2 className="text-2xl mb-4">
-      <a href={`#${slug}`} className="before:content-['#'] before:text-[#a8a095] no-underline hover:underline mr-3"></a>
+      <a href={`#${slug}`} className="before:content-['#'] before:text-[var(--gray)] border-b-0 mr-3"></a>
       {children}
     </h2>
   )
