@@ -21,7 +21,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Berkeley Mono", "JetBrains Mono", "Roboto Mono", monospace;
   font-size: large;
 }
 
