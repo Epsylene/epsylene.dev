@@ -151,7 +151,7 @@ export function WordsSoup({ children, searchQuery = '' }: WordsSoupProps) {
         ))}
       </div>
       
-      <div ref={containerRef} className="space-y-2">
+      <div ref={containerRef} className="space-y-2 font-unicode">
         {lines.map((line, i) => (
           <WordLine key={i}>
             {line}
@@ -356,7 +356,7 @@ export function Word({ title, children }: WordProps) {
               ×
             </button>
           </div>
-          <div className="prose-lg portrait:prose-base prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-6 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline prose-blockquote:border-l-4 prose-blockquote:border-red-400/65 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-[0.96em] prose-blockquote:leading-6 prose-h4:text-2xl prose-h4:font-bold text-[#c7bebe] leading-7 text-wrap">
+          <div className="prose-lg portrait:prose-base prose-p:m-0 prose-p:mb-2 prose-p:mt-4 prose-p:text-[1em] prose-ul:m-0 prose-ul:mr-5 prose-ol:m-0 prose-ol:mr-5 prose-ol:mb-2 prose-li:m-0 prose-a:text-red-400 prose-a:hover:underline prose-blockquote:border-l-4 prose-blockquote:border-red-400/65 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-[0.96em] prose-blockquote:leading-6 prose-h4:text-2xl prose-h4:font-bold text-[#c7bebe] leading-7 text-wrap max-w-max prose-ol:list-decimal prose-ul:list-disc marker:text-[#8b8585]">
             {children}
           </div>
         </div>

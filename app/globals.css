@@ -25,6 +25,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-size: large;
+  font-family:
+    var(--font-berkeley-mono),
+    "Roboto Mono",
+    monospace;
+}
+
+.font-unicode {
+  font-family: "Roboto Mono", monospace;
+  font-size: large;
 }
 
 ::selection {
