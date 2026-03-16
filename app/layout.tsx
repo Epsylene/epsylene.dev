@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const berkeleyMono = localFont({
+export const berkeleyMono = localFont({
   src: [
     {
       path: "../public/fonts/BerkeleyMono-Regular.woff2",
@@ -25,7 +25,8 @@ const berkeleyMono = localFont({
       weight: "700",
       style: "italic",
     }
-  ]
+  ],
+  variable: "--font-berkeley-mono",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={berkeleyMono.className}>
+      <body className={berkeleyMono.variable}>
         {children}
         <Analytics />
       </body>

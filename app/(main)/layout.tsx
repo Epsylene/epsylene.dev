@@ -22,7 +22,9 @@ export default function MainLayout({
         <main className="text mb-8">
           {children}
         </main>
-        <HomePrompt />
+        <div className="mt-10">
+          <HomePrompt />
+        </div>
       </div>
     </>
   );

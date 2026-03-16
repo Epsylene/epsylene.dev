@@ -15,7 +15,7 @@ export default async function Home() {
           <h1 className="text-4xl">
             epsylene
           </h1>
-          <hr className="flex-1 mt-[0.5ch] ml-4 border-t border-[#a8a095]" />
+          <hr className="flex-1 mt-[0.75ch] ml-4 border-t-2 border-[#a8a095]" />
         </div>
         <div>
           {content}

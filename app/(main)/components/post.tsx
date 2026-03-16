@@ -23,7 +23,7 @@ export function createHeading(level) {
       React.createElement('a', {
         href: `#${slug}`,
         key: `link-${slug}`,
-        className: `before:content-['${tag[level]}'] before:text-[var(--gray)] border-b-0 mr-3`,
+        className: `before:content-['${tag[level]}'] before:text-[var(--gray)] hover:before:text-white border-b-0 mr-3`,
       }),
       children
     )
