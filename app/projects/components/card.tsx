@@ -65,7 +65,7 @@ export async function Card({ title, link, image, children }: ProjectCardProps) {
             <h3 className="text-2xl font-semibold mb-2">{title}</h3>
           )
         }
-        <div className="[&>p]:mb-3 [&>p]:leading-relaxed [&>ul,ol]:mb-3 [&>ul,ol]:ml-5 [&>ul,ol]:space-y-1 [&>ul>li]:leading-relaxed [&>*:last-child]:mb-2 [&_a]:underline">
+        <div className="[&>p]:mb-3 [&>p]:leading-relaxed [&>ul,ol]:mb-3 [&>ul,ol]:ml-5 [&>ul,ol]:space-y-1 [&>ul>li]:leading-relaxed [&>*:last-child]:mb-2 [&_a]:underline [&_ol]:list-decimal [&_ul]:list-disc">
           {children}
         </div>
       </div>
