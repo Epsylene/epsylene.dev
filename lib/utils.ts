@@ -5,7 +5,7 @@ import matter from 'gray-matter'
 import { Vibrant } from 'node-vibrant/node'
 
 export function getPostsDirectory() {
-  return path.join(process.cwd(), 'content', 'posts')
+  return path.join(process.cwd(), 'content')
 }
 
 export function getPostSlugs() {

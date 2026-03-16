@@ -1,0 +1,21 @@
+Welcome to my personal website. Here you can find [information about me](#about-me), [links to my programming projects](#code), [miscellaneous notes and writings](/notes), and [some other things](/etc).
+
+## About me
+
+I’m a HPC research engineer, currently working for the [CALCULS](https://www.lsce.ipsl.fr/en/climat-cycles/calculs/) team at CEA/LSCE. I like understanding how computers work, and I’m particularly interested in performance optimization and parallel programming. Outside of work, I enjoy reading about languages and history, cooking, and being with friends.
+
+## Code
+
+Here are some of my programming projects:
+
+- [minigl](https://github.com/Epsylene/minigl): **A small OpenGL wrapper library**
+  
+  This is a small library I wrote to provide common functionality for my graphics programming projects. It includes a (varyingly) thin wrapper over the core OpenGL API, comprising abstractions for things like shaders, textures, framebuffers, etc. It also includes small utilities for math or mesh loading, and an application class that uses GLFW to create a window and manage the OpenGL context, inputs and render loop.
+
+- [Ilya](https://github.com/Epsylene/ilya): **A simple raytracer**
+
+  This is a simple raytracer based on the [Ray Tracing in One Weekend](https://raytracing.github.io/) series, written in C++. It features ray-sphere and ray-quad intersection, Lambertian diffusion, specular reflections, transparent and emissive materials, isotropic media, color/image and Perlin noise textures, BVH acceleration structure, instancing, importance sampling, next-neighbour resampling and defocus blur.
+
+- [caliban](https://github.com/Epsylene/caliban): **Vulkan engine**
+
+  Implementation of the [Rust Vulkan tutorial](https://kylemayes.github.io/vulkanalia/introduction.html), to learn Vulkan. It features error checking with validation layers, a complete render pass and pipeline, shader modules, vertex buffers, index buffers, staging buffers, uniform buffers, command buffers, the Vulkan Triangle, samplers and textures, a depth buffer, OBJ model loading, mipmaps, multisample antialiasing (MSAA) and push constants.

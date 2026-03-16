@@ -33,6 +33,10 @@ body {
 }
 
 @layer components {
+  .text p {
+    @apply mb-6;
+  }
+
   .text a {
     @apply text-red-400 border-b-[1px];
   }
