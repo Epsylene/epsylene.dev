@@ -1,7 +1,6 @@
 'use client'
 
 import { ReactNode, useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
 import { SearchInput } from './search-input'
 import { WordsSoup, subscribeToModalState } from './word'
 
