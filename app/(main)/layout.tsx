@@ -11,7 +11,7 @@ export default function MainLayout({
       <div className="min-h-screen max-w-[75ch] mx-auto my-[2ch] p-[1ch]">
         <div className="mb-10">
           <HomePrompt><strong>ls</strong></HomePrompt>
-          <nav className="flex flex-wrap gap-10">
+          <nav className="flex flex-wrap gap-x-10 gap-y-1">
             <span><LinkDir href="https://github.com/Epsylene">code/</LinkDir></span>
             <span><LinkDir href="/notes">notes/</LinkDir></span>
             <span><LinkDir href="/etc">etc/</LinkDir></span>
