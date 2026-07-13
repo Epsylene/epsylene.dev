@@ -16,7 +16,7 @@ export default function MainLayout({
             <span><LinkDir href="/notes">notes/</LinkDir></span>
             <span><LinkDir href="/etc">etc/</LinkDir></span>
             <span><LinkFile href="/">about.md</LinkFile></span>
-            <span><LinkFile href="/resume.pdf">résumé.pdf</LinkFile></span>
+            <span><LinkFile href="/resume">résumé.md</LinkFile></span>
           </nav>
         </div>
         <main className="text mb-8">
